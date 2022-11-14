@@ -20,16 +20,16 @@ fi
 
 if [ "1" -eq "$level" ]
 then
+    export DEBIAN_FRONTEND=noninteractive
     echo -e "\e[32mFull install selected, this will take some time...\e[0m"
     sudo apt update 
     echo -e "\e[32mUpgrading default packages\e[0m"
     sudo apt upgrade -y
     echo -e "\e[31mRemoving bundled burp\e[0m"
     sudo apt purge burpsuite -y
-    sudo apt install p7zip-full,python3-pip -y
+    sudo apt install p7zip-full python3-pip -y
 
 
-    cd ~/Downloads
     echo -e "\e[32mInstalling VSCode\e[0m"
     wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O "code_install.deb"
     sudo apt install ./code_install.deb -y
@@ -62,7 +62,9 @@ chmod 700 jwt_tool/jwt_tool.py
 wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/Obsidian-1.0.3.AppImage" -O Obsidian.AppImage
 chmod 700 ./Obsidian.AppImage
 git clone "https://github.com/pwndbg/pwndbg"
-./pwndbg/setup.sh
+cd pwndbg
+./setup.sh
+cd ../
 git clone "https://github.com/danielmiessler/SecLists"
 
 mkdir uploadable
