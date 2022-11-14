@@ -10,7 +10,7 @@ done
 
 if [ -z "$level" ] || [ "$level" -lt "1" ] || [ "$level" -gt "3" ]
 then
-      echo "Usage: ./H34T.sh -l <level>\n"
+      echo "Usage: ./H34T.sh -l <level>"
       echo "Available levels:"
       echo "1 - Full temp"
       echo "2 - Tools only - install"
@@ -24,10 +24,10 @@ then
     echo -e "\e[32mFull install selected, this will take some time...\e[0m"
     sudo apt update 
     echo -e "\e[32mUpgrading default packages\e[0m"
-    sudo apt upgrade -y
+    sudo apt upgrade -yq
     echo -e "\e[31mRemoving bundled burp\e[0m"
     sudo apt purge burpsuite -y
-    sudo apt install p7zip-full python3-pip -y
+    sudo apt install p7zip-full python3-pip checksec python3-pwntools ropper -yq
 
 
     echo -e "\e[32mInstalling VSCode\e[0m"
@@ -63,6 +63,7 @@ wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/O
 chmod 700 ./Obsidian.AppImage
 git clone "https://github.com/pwndbg/pwndbg"
 cd pwndbg
+echo -e "\e[32mSetting up pwndbg\e[0m"
 ./setup.sh
 cd ../
 git clone "https://github.com/danielmiessler/SecLists"
